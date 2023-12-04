@@ -1,3 +1,38 @@
+import pygame
+import sys
+import time 
+
+pygame.init() # 초기화
+screen_width=800
+screen_height=600
+
+# 창 화면
+width, height = 800, 600
+screen = pygame.display.set_mode((screen_width,screen_height))
+Clock = pygame.time.Clock()
+
+pygame.display.set_caption("리듬게임")
+
+white = (255, 255, 255) # 배경색
+black = (0, 0, 0)
+
+font = pygame.font.Font("D:/python응용/pygame/NeoDunggeunmoPro-Regular.ttf", 30)
+
+title_path="D:/python응용/pygame/def start_screen()/title.png"
+title_image=pygame.image.load(title_path)
+title_image.get_size()
+title_x,title_y=(130, 100)
+
+# 시작 버튼 이미지 
+start_button_path="D:/python응용/pygame/def start_screen()/button_start.png"
+start_button_image=pygame.image.load(start_button_path)
+button_width,button_height=start_button_image.get_size()
+st_button_x, st_button_y=(305-160,300+100)
+
+# 질문 버튼 이미지 
+question_button_path="D:/python응용/pygame/def start_screen()/button_question.png"
+question_button_image=pygame.image.load(question_button_path)
+button_width,button_height=question_button_image.get_size()
 qu_button_x, qu_button_y=(305+150,296+100)
 
 # 클릭 말풍선 이미지 
@@ -146,8 +181,8 @@ def draw_button(text, position):
     return button_rect # 꼭 반환시켜야함
 
 current_state = start_screen()
-next_state= next_start_screen() # 시작화면 표시
-story_state=story_screen() 
+next_state = next_start_screen() # 시작화면 표시
+story_state = story_screen() 
 
 running = True # True로 초기화
 while running:
@@ -157,7 +192,7 @@ while running:
 
     if current_state == "story":
         story_screen()
-        if story_state =="next_story":
+    if story_state =="next_story":
             next_start_screen()
     if current_state=="next_question":
         next_question_screen()
@@ -170,4 +205,3 @@ while running:
 
 pygame.quit()
 sys.exit()
-
