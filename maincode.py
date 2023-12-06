@@ -209,21 +209,38 @@ def next_start_screen():
     three_color_cat_image = pygame.transform.scale(three_color_cat_image,(300,300))
     cheese_cat_image = pygame.image.load("D:/python응용/pygame/cheese_cat0.png")
     cheese_cat_image = pygame.transform.scale(cheese_cat_image,(300,300))
-    screen.blit(three_color_cat_image,(430,30))
+    screen.blit(three_color_cat_image,(430,80))
     pygame.display.update()
     cat_x=0
     catlist =[three_color_cat_image,black_cat_image,cheese_cat_image]
-    draw_button("<고양이를 선택하세요!>",(590,80))
+    draw_button("<고양이를 선택하세요!>",(590,120))
 
     cat_select_button_path = "D:/python응용/pygame/def next_start_screen()/next_select_button.png"
     cat_select_button_right = pygame.image.load(cat_select_button_path)
     game_start_button_width, game_start_button_height = cat_select_button_right.get_size()
-    screen.blit(cat_select_button_right, (730,190))
+    screen.blit(cat_select_button_right, (730,230))
 
     cat_select_button_path = "D:/python응용/pygame/def next_start_screen()/next_select_button_left.png"
     cat_select_button_left = pygame.image.load(cat_select_button_path)
     game_start_button_width, game_start_button_height = cat_select_button_left.get_size()
-    screen.blit(cat_select_button_left, (415,190))
+    screen.blit(cat_select_button_left, (415,230))
+
+    black_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/black_cat_choice_button.png")
+    black_cat_choice_button_image = pygame.transform.scale(black_cat_choice_button_path,(240,100))
+    three_color_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/three_color_cat_button.png")
+    three_color_cat_choice_button_image = pygame.transform.scale(three_color_cat_choice_button_path,(240,100))
+    cheese_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/cheese_cat_choice_button.png")
+    cheese_cat_choice_button_image = pygame.transform.scale(cheese_cat_choice_button_path,(240,100))
+    screen.blit(three_color_cat_choice_button_image,(470,380))
+    cat_choice_button_text1=font.render("선택",True,(255,255,255))
+    cat_choice_button_text2=font.render("선택",True,(0,0,0))
+    cat_choice_button_rect1=cat_choice_button_text1.get_rect(center=(590,420))
+    cat_choice_button_rect2=cat_choice_button_text2.get_rect(center=(590,420))
+    screen.blit(cat_choice_button_text2,cat_choice_button_rect2)
+    pygame.display.update()
+    cat_x=0
+    cat_choice_list =[three_color_cat_choice_button_image,black_cat_choice_button_image,cheese_cat_choice_button_image]
+
 
 
     pygame.display.update()
@@ -235,17 +252,33 @@ def next_start_screen():
                 pygame.quit()
                 sys.exit()
             elif event.type==pygame.MOUSEBUTTONDOWN:
-                if(mouse_x>=700 and mouse_x <= 700+60 and mouse_y >= 190-30 and mouse_y<= 190+30):
+                if(mouse_x>=700 and mouse_x <= 700+60 and mouse_y >= 230-30 and mouse_y<= 230+30):
                     cat_x+=1
-                    screen.blit(catlist[cat_x%3],(430,30))
-                if(mouse_x>=415-30 and mouse_x <= 415+30 and mouse_y >= 190-30 and mouse_y<= 190+30):
+                    screen.blit(catlist[cat_x%3],(430,80))
+                    screen.blit(cat_choice_list[cat_x%3],(465,380))
+                    cat_res=cat_x%3
+                    if cat_res==1:
+                        screen.blit(cat_choice_button_text1,cat_choice_button_rect1)
+                    else:
+                        screen.blit(cat_choice_button_text2,cat_choice_button_rect2)
+                    pygame.display.update()
+                if(mouse_x>=415-30 and mouse_x <= 415+30 and mouse_y >= 230-30 and mouse_y<= 230+30):
                     cat_x-=1
-                    screen.blit(catlist[cat_x%3],(430,30))
+                    screen.blit(catlist[cat_x%3],(430,80))
+                    screen.blit(cat_choice_list[cat_x%3],(465,380))
+                    cat_res=cat_x%3
+                    if cat_res==1:
+                        screen.blit(cat_choice_button_text1,cat_choice_button_rect1)
+                    else:
+                        screen.blit(cat_choice_button_text2,cat_choice_button_rect2)
+                    pygame.display.update()
                 
                 if return_button_rect.collidepoint(event.pos):
                     return "start"
             mouse_x,mouse_y=pygame.mouse.get_pos()
             pygame.display.update()
+
+        
     
 # 시작 버튼 다음 화면
 # 시작 배경음악 있어야 하나..?
