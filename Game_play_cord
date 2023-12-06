@@ -4,6 +4,7 @@
 '''
 import pygame
 import sys
+import random
 
 pygame.init()
 
@@ -26,7 +27,8 @@ black = (0, 0, 0)
 # 장애물 설정 1
 obstacle_width, obstacle_height = 50, 50
 obstacle_speed = 5
-obstacle_interval = 2000
+obstacle_interval_random = random.randrange(3,8)
+obstacle_interval = obstacle_interval_random * 1000
 obstacle_timer = pygame.time.get_ticks()
 obstacles = []  # 여러 장애물 저장
 obstacle_image = pygame.image.load("IMG_2388.png")
@@ -35,7 +37,8 @@ obstacle_image = pygame.transform.scale(obstacle_image, (obstacle_width, obstacl
 # 장애물 설정 2
 obstacle_2_width, obstacle_2_height = 50, 100
 obstacle_2_speed = 6
-obstacle_2_interval = 3000
+obstacle_2_interval_random = random.randrange(5,11)
+obstacle_2_interval = obstacle_2_interval_random * 1000
 obstacle_2_timer = pygame.time.get_ticks()
 obstacles_2 = []  # 여러 장애물 저장
 obstacle_2_image = pygame.image.load("IMG_2386.png")
