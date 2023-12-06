@@ -1,3 +1,7 @@
+'''
+장애물 이미지 투명x
+랜덤함수 이용시 장애물 겹치거나 가까운 부분 고치기
+'''
 import pygame
 import sys
 
@@ -25,6 +29,8 @@ obstacle_speed = 5
 obstacle_interval = 2000
 obstacle_timer = pygame.time.get_ticks()
 obstacles = []  # 여러 장애물 저장
+obstacle_image = pygame.image.load("IMG_2388.png")
+obstacle_image = pygame.transform.scale(obstacle_image, (obstacle_width, obstacle_height))
 
 # 장애물 설정 2
 obstacle_2_width, obstacle_2_height = 50, 100
@@ -32,6 +38,8 @@ obstacle_2_speed = 6
 obstacle_2_interval = 3000
 obstacle_2_timer = pygame.time.get_ticks()
 obstacles_2 = []  # 여러 장애물 저장
+obstacle_2_image = pygame.image.load("IMG_2386.png")
+obstacle_2_image = pygame.transform.scale(obstacle_2_image, (obstacle_2_width, obstacle_2_height))
 
 # 캐릭터 설정
 character_width, character_height = 50, 50
@@ -186,10 +194,10 @@ while True:
 
     # 장애물 그리기
     for obstacle in obstacles:
-        pygame.draw.rect(screen, (255, 0, 0), (*obstacle, obstacle_width, obstacle_height))
+        screen.blit(obstacle_image, (obstacle[0], obstacle[1]))
 
     for obstacle_2 in obstacles_2:
-        pygame.draw.rect(screen, (0, 255, 0), (*obstacle_2, obstacle_2_width, obstacle_2_height))
+        screen.blit(obstacle_2_image, (obstacle_2[0], obstacle_2[1]))
 
     # 캐릭터 그리기
     if not is_blinking or (is_blinking and current_time % 200 < 100):
