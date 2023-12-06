@@ -1,9 +1,3 @@
-'''
-<고칠 부분>
-1) 장애물 생성에 랜덤함수 이용할 때 2개가 겹칠 경우 와 너무 가까울 경우 고려
-2) 이미지 삽입 후 코드가 달라짐
-'''
-
 import pygame
 import sys
 
@@ -42,6 +36,17 @@ obstacles_2 = []  # 여러 장애물 저장
 # 캐릭터 설정
 character_width, character_height = 50, 50
 character_x, character_y = width // 3 - character_width // 2, height - character_height * 2
+character_image = [
+        pygame.image.load("black_cat0.png"),
+        pygame.image.load("black_cat1.png"),
+        pygame.image.load("black_cat2.png"),
+        pygame.image.load("black_cat3.png")
+    ]
+chr = 0
+character_image[0] = pygame.transform.scale(character_image[0], (character_width, character_height))
+character_image[1] = pygame.transform.scale(character_image[1], (character_width, character_height))
+character_image[2] = pygame.transform.scale(character_image[2], (character_width, character_height))
+character_image[3] = pygame.transform.scale(character_image[3], (character_width, character_height))
 
 #점프
 character_jump = False
@@ -68,6 +73,7 @@ if pygame.mixer.music.get_busy() == False:
         pygame.mixer.music.play(-1)
 
 while True:
+    chr += 1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -187,7 +193,7 @@ while True:
 
     # 캐릭터 그리기
     if not is_blinking or (is_blinking and current_time % 200 < 100):
-        pygame.draw.rect(screen, (0, 0, 255), (character_x, character_y, character_width, character_height))
+        screen.blit(character_image[chr%4], (character_x, character_y))
 
     # 체력 표시
     stamina_text = font.render(f"Heart: {Heart}", True, black)
