@@ -19,12 +19,19 @@ except:
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-# 장애물 설정
+# 장애물 설정 1
 obstacle_width, obstacle_height = 50, 50
 obstacle_speed = 5
 obstacle_interval = 2000
 obstacle_timer = pygame.time.get_ticks()
 obstacles = []  # 여러 장애물 저장
+
+# 장애물 설정 2
+obstacle_2_width, obstacle_2_height = 50, 100
+obstacle_2_speed = 6
+obstacle_2_interval = 3000
+obstacle_2_timer = pygame.time.get_ticks()
+obstacles_2 = []  # 여러 장애물 저장
 
 # 캐릭터 설정
 character_width, character_height = 50, 50
@@ -40,12 +47,12 @@ jump_count = default_count
 Heart = 3
 
 # 무적 상태 설정
-invincible_duration = 1000
+invincible_duration = 1500
 invincible_timer = 0
 is_invincible = False
 
 # 반짝임 설정
-blink_duration = 1000
+blink_duration = 1500
 blink_timer = 0
 is_blinking = False
 
@@ -62,13 +69,13 @@ while True:
 
     keys = pygame.key.get_pressed()
 
-    #캐릭터 F점프
+    # 캐릭터 F점프
     if keys[pygame.K_f] and not character_jump:
         character_jump = True
         f_jump = True
 
     if (character_jump == True):
-    #f 눌렀을때 점프 스타일
+    # f 눌렀을때 점프 스타일
         if (f_jump == True):
             if jump_count >= -default_count and jump_count < 0:
                 character_y += (jump_count ** 2) * 0.5
@@ -90,13 +97,23 @@ while True:
         obstacle_y = height - character_height * 2
         obstacles.append((obstacle_x, obstacle_y))
         obstacle_timer = current_time
+    
+    if current_time - obstacle_2_timer > obstacle_2_interval:
+        obstacle_2_x = width
+        obstacle_2_y = height - (character_height * 2) - 50
+        obstacles_2.append((obstacle_2_x, obstacle_2_y))
+        obstacle_2_timer = current_time
 
     # 장애물 위치 업데이트
     for i in range(len(obstacles)):
         obstacles[i] = (obstacles[i][0] - obstacle_speed, obstacles[i][1])
 
+    for i in range(len(obstacles_2)):
+        obstacles_2[i] = (obstacles_2[i][0] - obstacle_2_speed, obstacles_2[i][1])
+
     # 화면에서 벗어난 장애물 제거
     obstacles = [obs for obs in obstacles if obs[0] + obstacle_width > 0]
+    obstacles_2 = [obs for obs in obstacles_2 if obs[0] + obstacle_2_width > 0]
     '''
     obs는 obstacles 리스트의 각 요소를 나타냅니다.
     obs[0]는 장애물의 x 좌표를 나타냅니다.
@@ -111,12 +128,30 @@ while True:
     if is_blinking and current_time - blink_timer > blink_duration:
         is_blinking = False
 
-    # 장애물과 충돌 확인
+    # 장애물1과 충돌 확인
     for obstacle in obstacles:
         obstacle_rect = pygame.Rect(obstacle[0], obstacle[1], obstacle_width, obstacle_height)
         character_rect = pygame.Rect(character_x, character_y, character_width, character_height)
 
         if character_rect.colliderect(obstacle_rect):
+            if not is_invincible:
+                Heart -= 1
+                is_invincible = True
+                invincible_timer = current_time
+                is_blinking = True
+                blink_timer = current_time
+            elif Heart <= 0:
+                # 체력이 0이면 캐릭터를 화면 밖으로 이동(캐릭터 사라짐)
+                character_x = -100
+                if pygame.mixer.music.get_busy() == True:
+                    pygame.mixer.music.stop()
+
+    # 장애물2와 충돌 확인
+    for obstacle_2 in obstacles_2:
+        obstacle_2_rect = pygame.Rect(obstacle_2[0], obstacle_2[1], obstacle_2_width, obstacle_2_height)
+        character_rect = pygame.Rect(character_x, character_y, character_width, character_height)
+
+        if character_rect.colliderect(obstacle_2_rect):
             if not is_invincible:
                 Heart -= 1
                 is_invincible = True
@@ -140,6 +175,9 @@ while True:
     # 장애물 그리기
     for obstacle in obstacles:
         pygame.draw.rect(screen, (255, 0, 0), (*obstacle, obstacle_width, obstacle_height))
+
+    for obstacle_2 in obstacles_2:
+        pygame.draw.rect(screen, (0, 255, 0), (*obstacle_2, obstacle_2_width, obstacle_2_height))
 
     # 캐릭터 그리기
     if not is_blinking or (is_blinking and current_time % 200 < 100):
