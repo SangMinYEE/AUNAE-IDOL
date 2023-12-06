@@ -7,6 +7,15 @@ width, height = 800, 600
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("집사를 찾아서")
 
+game_back_ground_path = pygame.image.load("game_back_ground.png")
+game_back_ground = pygame.transform.scale(game_back_ground_path, (2771, height))
+bg_x = 0
+
+try:
+    pygame.mixer.music.load("bgm_AcousticBeat.ogg")
+except:
+    print("ogg 파일이 맞지 않거나, 오디오 기기가 접속되어 있지 않습니다")
+
 white = (255, 255, 255)
 black = (0, 0, 0)
 
@@ -19,7 +28,7 @@ obstacles = []  # 여러 장애물 저장
 
 # 캐릭터 설정
 character_width, character_height = 50, 50
-character_x, character_y = width // 2 - character_width // 2, height // 2 - character_height // 2
+character_x, character_y = width // 3 - character_width // 2, height - character_height * 2
 
 #점프
 character_jump = False
@@ -41,6 +50,9 @@ blink_timer = 0
 is_blinking = False
 
 font = pygame.font.Font(None, 36)
+
+if pygame.mixer.music.get_busy() == False:
+        pygame.mixer.music.play(-1)
 
 while True:
     for event in pygame.event.get():
@@ -75,7 +87,7 @@ while True:
     current_time = pygame.time.get_ticks()
     if current_time - obstacle_timer > obstacle_interval:
         obstacle_x = width
-        obstacle_y = height // 2 - obstacle_height // 2
+        obstacle_y = height - character_height * 2
         obstacles.append((obstacle_x, obstacle_y))
         obstacle_timer = current_time
 
@@ -114,9 +126,16 @@ while True:
             elif Heart <= 0:
                 # 체력이 0이면 캐릭터를 화면 밖으로 이동(캐릭터 사라짐)
                 character_x = -100
+                if pygame.mixer.music.get_busy() == True:
+                    pygame.mixer.music.stop()
 
-    # 화면 지우기
-    screen.fill(white)
+    bg_x -= 5
+    
+    if bg_x < -game_back_ground.get_width():
+        bg_x = 0
+
+    screen.blit(game_back_ground, (bg_x, 0))
+    screen.blit(game_back_ground, (bg_x + game_back_ground.get_width(), 0))
 
     # 장애물 그리기
     for obstacle in obstacles:
