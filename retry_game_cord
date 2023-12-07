@@ -387,7 +387,8 @@ def game_mode():
     cheese_cat_image3 = pygame.transform.scale(cheese_cat_image3,(character_width,character_height))
     
     #게임 플레이 시 배경 이미지 파일
-    bg_image = pygame.image.load("game_back_ground.png")
+    bg_image_path = pygame.image.load("game_back_ground.png")
+    bg_image = pygame.transform.scale(bg_image_path, (2771, height))
     bg_image_rect = bg_image.get_rect()
     bg_image_width = bg_image_rect.width
     #catlist =[three_color_cat_image,black_cat_image,cheese_cat_image]
