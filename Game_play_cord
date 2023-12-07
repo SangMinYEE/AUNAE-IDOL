@@ -1,7 +1,8 @@
 '''
 장애물 이미지 투명x
-랜덤함수 이용시 장애물 겹치거나 가까운 부분 고치기
+랜덤함수 이용시 장애물 가까운 부분 고치기
 '''
+
 import pygame
 import sys
 import random
@@ -26,19 +27,15 @@ black = (0, 0, 0)
 
 # 장애물 설정 1
 obstacle_width, obstacle_height = 50, 50
-obstacle_speed = 5
-obstacle_interval_random = random.randrange(3,8)
-obstacle_interval = obstacle_interval_random * 1000
+obstacle_speed = 8
 obstacle_timer = pygame.time.get_ticks()
 obstacles = []  # 여러 장애물 저장
 obstacle_image = pygame.image.load("IMG_2388.png")
 obstacle_image = pygame.transform.scale(obstacle_image, (obstacle_width, obstacle_height))
 
 # 장애물 설정 2
-obstacle_2_width, obstacle_2_height = 50, 100
-obstacle_2_speed = 6
-obstacle_2_interval_random = random.randrange(5,11)
-obstacle_2_interval = obstacle_2_interval_random * 1000
+obstacle_2_width, obstacle_2_height = 100, 100
+obstacle_2_speed = 8
 obstacle_2_timer = pygame.time.get_ticks()
 obstacles_2 = []  # 여러 장애물 저장
 obstacle_2_image = pygame.image.load("IMG_2386.png")
@@ -92,6 +89,13 @@ while True:
 
     keys = pygame.key.get_pressed()
 
+    # 장애물1 등장 시간 랜덤(2~10)
+    obstacle_interval_random = random.randrange(20,110)
+    obstacle_interval = obstacle_interval_random * 100 #0.1초
+    # 장애물2 등장 시간 랜덤(4~12)
+    obstacle_2_interval_random = random.randrange(40,130)
+    obstacle_2_interval = obstacle_2_interval_random * 100 #0.1초
+
     # 캐릭터 F점프
     if keys[pygame.K_f] and not character_jump:
         character_jump = True
@@ -120,7 +124,7 @@ while True:
         obstacle_y = height - character_height * 2
         obstacles.append((obstacle_x, obstacle_y))
         obstacle_timer = current_time
-    
+
     if current_time - obstacle_2_timer > obstacle_2_interval:
         obstacle_2_x = width
         obstacle_2_y = height - (character_height * 2) - 50
@@ -183,7 +187,7 @@ while True:
                 blink_timer = current_time
             elif Heart <= 0:
                 # 체력이 0이면 캐릭터를 화면 밖으로 이동(캐릭터 사라짐)
-                character_x = -100
+                character_y = -1000
                 if pygame.mixer.music.get_busy() == True:
                     pygame.mixer.music.stop()
 
@@ -194,6 +198,20 @@ while True:
 
     screen.blit(game_back_ground, (bg_x, 0))
     screen.blit(game_back_ground, (bg_x + game_back_ground.get_width(), 0))
+
+    # 장애물1과 장애물2가 겹치면 장애물이 사라지도록 함
+    for obstacle_1 in obstacles:
+        obstacle_1_rect = pygame.Rect(obstacle_1[0], obstacle_1[1], obstacle_width, obstacle_height)
+    
+        for obstacle_2 in obstacles_2:
+            obstacle_2_rect = pygame.Rect(obstacle_2[0], obstacle_2[1], obstacle_2_width, obstacle_2_height)
+
+            if obstacle_1_rect.colliderect(obstacle_2_rect):
+                # 겹치는 경우, 둘 중 하나를 삭제
+                if random.choice([True, False]):
+                    obstacles.remove(obstacle_1)
+                else:
+                    obstacles_2.remove(obstacle_2)
 
     # 장애물 그리기
     for obstacle in obstacles:
