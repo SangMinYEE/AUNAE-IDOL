@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-import time 
+
 
 pygame.init()
 pygame.mixer.init()  # mixer 모듈 초기화
@@ -420,7 +420,7 @@ def game_mode():
     obstacle_2_image = pygame.transform.scale(obstacle_2_image, (obstacle_2_width, obstacle_2_height))
     
     # 체력 설정
-    Heart = 2
+    Heart = 9
     # 무적 상태 설정
     invincible_duration = 1500
     invincible_timer = 0
@@ -488,7 +488,7 @@ def game_mode():
                 sys.exit()
                
         elapsed_ticks = pygame.time.get_ticks() - start_ticks
-        elapsed_seconds = 10-(elapsed_ticks // 1000)  # 밀리세컨드를 초로 변환
+        elapsed_seconds = 93-(elapsed_ticks // 1000)  # 밀리세컨드를 초로 변환
            
         if(x2<-bg_image_width):
             x2=0
@@ -569,7 +569,7 @@ def game_mode():
             character_rect = pygame.Rect(character_x, character_y, character_width, character_height)
 
             if Heart>=1:
-                if character_rect.colliderect(obstacle_rect):
+                if character_rect.colliderect(obstacle_2_rect):
                     if not is_invincible: # 장애물과 부딪힘
                         Heart -= 1
                         is_invincible = True
