@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import time 
 
 pygame.init()
 pygame.mixer.init()  # mixer 모듈 초기화
@@ -66,6 +67,85 @@ def game_over():
                 pygame.mouse.get_pos()
         pygame.display.update()
 
+def game_ending1():
+    game_ending_path = pygame.image.load("D:/python응용/pygame/def game_ending/ending1.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
+    screen.blit(game_ending_image, (0, 0)) 
+    
+    next_button_text=font.render("next >",True,(255,255,255))
+    next_button_rect=next_button_text.get_rect(center=(720,530))
+    screen.blit(next_button_text,next_button_rect)
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                # 이벤트 타입이 마우스버튼을 누르기 이벤트인지 확인 
+                if next_button_rect.collidepoint(event.pos):
+                    return "next_ending2"  
+def game_ending2():
+    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending2.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
+    screen.blit(game_ending_image, (0, 0)) 
+    
+    next_button_text=font.render("next >",True,(255,255,255))
+    next_button_rect=next_button_text.get_rect(center=(720,530))
+    screen.blit(next_button_text,next_button_rect)
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                # 이벤트 타입이 마우스버튼을 누르기 이벤트인지 확인 
+                if next_button_rect.collidepoint(event.pos):
+                    return "next_ending3" 
+def game_ending3():
+    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending3.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
+    screen.blit(game_ending_image, (0, 0)) 
+    
+    next_button_text=font.render("next >",True,(255,255,255))
+    next_button_rect=next_button_text.get_rect(center=(720,530))
+    screen.blit(next_button_text,next_button_rect)
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                # 이벤트 타입이 마우스버튼을 누르기 이벤트인지 확인 
+                if next_button_rect.collidepoint(event.pos):
+                    return "next_ending4"
+                
+def game_ending4():
+    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending4.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
+    screen.blit(game_ending_image, (0, 0)) 
+    
+    next_button_text=font.render("go start >",True,(255,255,255))
+    next_button_rect=next_button_text.get_rect(center=(720,530))
+    screen.blit(next_button_text,next_button_rect)
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                # 이벤트 타입이 마우스버튼을 누르기 이벤트인지 확인 
+                if next_button_rect.collidepoint(event.pos):
+                    return "start" 
+
+
 # 시작화면 함수
 def start_screen():
     
@@ -96,6 +176,7 @@ def start_screen():
             if start_button_rect.collidepoint(mouse_x,mouse_y):
                 screen.blit(click_image,(st_click_button_x-725,st_click_button_y-730+100))
         pygame.display.update()
+
         
 def story_screen():
     background_path = pygame.image.load("D:/python응용/pygame/story/story_1.png")  # 실제 이미지 파일 경로로 대체해
@@ -318,8 +399,11 @@ def next_start_screen():
 ####################게임 중인 화면#############################
 def game_mode():
     global cat_x
+
+    # 게임이 시작된 시간을 기록 
+    start_ticks = pygame.time.get_ticks()
+
     # 장애물 설정 1
-    
     obstacle_width, obstacle_height = 50, 50
     obstacle_speed = 12
     obstacle_timer = pygame.time.get_ticks()
@@ -336,8 +420,7 @@ def game_mode():
     obstacle_2_image = pygame.transform.scale(obstacle_2_image, (obstacle_2_width, obstacle_2_height))
     
     # 체력 설정
-    Heart = 3
-
+    Heart = 2
     # 무적 상태 설정
     invincible_duration = 1500
     invincible_timer = 0
@@ -396,18 +479,29 @@ def game_mode():
                       [cheese_cat_image1,cheese_cat_image2,cheese_cat_image3]]
     #캐릭터의 x,y좌표
     character_rect = pygame.Rect(character_x, character_y, 60, 60)
-
+    
     while True:
         #화면창종료표시
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            
+               
+        elapsed_ticks = pygame.time.get_ticks() - start_ticks
+        elapsed_seconds = 10-(elapsed_ticks // 1000)  # 밀리세컨드를 초로 변환
+           
         if(x2<-bg_image_width):
             x2=0
         screen.blit(bg_image,(x2,0))
         screen.blit(bg_image,(x2+bg_image_width,0))
+
+        # 남은시간 표시 함
+        draw_button(f"Elapsed time: {elapsed_seconds}",(width//2, 36))
+
+            # 남은시간이 다 되면 노래를 멈추고 엔딩화면 출력
+        if elapsed_seconds==0:
+            return "next_ending1"
+            
         # 장애물1 등장 시간 랜덤(2~10)
         obstacle_interval_random = random.randrange(20,110)
         obstacle_interval = obstacle_interval_random * 100 #0.1초
@@ -462,7 +556,7 @@ def game_mode():
             elif Heart <= 0:
                 # 체력이 0이면 캐릭터를 화면 밖으로 이동(캐릭터 사라짐)
                 pygame.mixer.music.stop()
-                game_over()
+                return game_over()
                 pygame.display.update()
                 if pygame.mixer.music.get_busy() == True:
                     pygame.mixer.music.stop()
@@ -485,11 +579,14 @@ def game_mode():
             elif Heart <= 0:
                 # 체력이 0이면 캐릭터를 화면 밖으로 이동(캐릭터 사라짐)
                 pygame.mixer.music.stop()
-                game_over()
+                return game_over()
                 pygame.display.update()
                 if pygame.mixer.music.get_busy() == True:
                     pygame.mixer.music.stop()
         if Heart >= 1:
+            x2-=3
+                    
+        if Heart >=1:
             x2-=3
 
 
@@ -524,7 +621,7 @@ def game_mode():
             is_blinking = False
             
         # 체력 표시
-        stamina_text = font.render(f"Heart: {Heart}", True, black)
+        stamina_text = font.render(f"Heart: {Heart}",True, black)
         screen.blit(stamina_text, (width - 150, 20))
 
         # 무적 표시
@@ -692,6 +789,17 @@ while running:
 
     elif current_state == "return_ready":
         current_state = next_start_screen()
+
+    elif current_state =="next_ending1":
+        current_state=game_ending1()
+    elif current_state =="next_ending2":
+        current_state=game_ending2()
+    elif current_state =="next_ending3":
+        current_state=game_ending3()
+    elif current_state =="next_ending4":
+        current_state=game_ending4()
+    elif current_state =="start":
+        current_state=start_screen()
 
     mouse_x,mouse_y=pygame.mouse.get_pos()    
     pygame.display.flip()
