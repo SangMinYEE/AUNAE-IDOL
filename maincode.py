@@ -19,27 +19,27 @@ pygame.display.set_caption("집사를 찾아서")
 white = (255, 255, 255) # 배경색
 black = (0, 0, 0)
 
-font = pygame.font.Font("D:/python응용/pygame/NeoDunggeunmoPro-Regular.ttf", 30)
+font = pygame.font.Font("font/NeoDunggeunmoPro-Regular.ttf", 30)
 
-title_path="D:/python응용/pygame/def start_screen()/title.png"
+title_path="bg/title.png"
 title_image=pygame.image.load(title_path)
 title_image.get_size()
 title_x,title_y=(130, 100)
 
 # 시작 버튼 이미지 
-start_button_path="D:/python응용/pygame/def start_screen()/button_start.png"
+start_button_path="button/button_start.png"
 start_button_image=pygame.image.load(start_button_path)
 button_width,button_height=start_button_image.get_size()
 st_button_x, st_button_y=(305-160,300+100)
 
 # 질문 버튼 이미지 
-question_button_path="D:/python응용/pygame/def start_screen()/button_question.png"
+question_button_path="button/button_question.png"
 question_button_image=pygame.image.load(question_button_path)
 button_width,button_height=question_button_image.get_size()
 qu_button_x, qu_button_y=(305+150,296+100)
 
 # 클릭 말풍선 이미지 
-click_image_path="D:/python응용/pygame/def start_screen()/click.png"
+click_image_path="button/click.png"
 click_image=pygame.image.load(click_image_path)
 cilck_width,click_height=click_image.get_size()
 
@@ -48,7 +48,7 @@ qu_click_button_x,qu_click_button_y=(1000,1000)
 
 def game_over():
      
-    game_over_path = pygame.image.load("D:/python응용/pygame/def game_over()/bad_ending.png")  # 실제 이미지 파일 경로로 대체해
+    game_over_path = pygame.image.load("ending.lmage/bad_ending.png")  # 실제 이미지 파일 경로로 대체해
     game_over_image = pygame.transform.scale(game_over_path, (width, height))
     screen.blit(game_over_image, (0, 0)) 
     # 버튼을 그림
@@ -68,7 +68,7 @@ def game_over():
         pygame.display.update()
 
 def game_ending1():
-    game_ending_path = pygame.image.load("D:/python응용/pygame/def game_ending/ending1.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_path = pygame.image.load("ending.lmage/ending1.png")  # 실제 이미지 파일 경로로 대체해
     game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
     screen.blit(game_ending_image, (0, 0)) 
     
@@ -87,7 +87,7 @@ def game_ending1():
                 if next_button_rect.collidepoint(event.pos):
                     return "next_ending2"  
 def game_ending2():
-    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending2.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_path = pygame.image.load("ending.lmage/ending2.png")  # 실제 이미지 파일 경로로 대체해
     game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
     screen.blit(game_ending_image, (0, 0)) 
     
@@ -106,7 +106,7 @@ def game_ending2():
                 if next_button_rect.collidepoint(event.pos):
                     return "next_ending3" 
 def game_ending3():
-    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending3.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_path = pygame.image.load("ending.lmage/ending3.png")  # 실제 이미지 파일 경로로 대체해
     game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
     screen.blit(game_ending_image, (0, 0)) 
     
@@ -126,7 +126,7 @@ def game_ending3():
                     return "next_ending4"
                 
 def game_ending4():
-    game_ending_path = pygame.image.load("D:\python응용\pygame\def game_ending\ending4.png")  # 실제 이미지 파일 경로로 대체해
+    game_ending_path = pygame.image.load("ending.lmage/ending4.png")  # 실제 이미지 파일 경로로 대체해
     game_ending_image = pygame.transform.scale(game_ending_path, (width, height))
     screen.blit(game_ending_image, (0, 0)) 
     
@@ -149,7 +149,7 @@ def game_ending4():
 # 시작화면 함수
 def start_screen():
     
-    background_image = pygame.image.load("D:/python응용/pygame/def start_screen()/start_back_ground.png")  # 실제 이미지 파일 경로로 대체해
+    background_image = pygame.image.load("bg/start_back_ground.png")  # 실제 이미지 파일 경로로 대체해
     background_image = pygame.transform.scale(background_image, (width, height))
     screen.blit(background_image, (0, 0)) 
     # 버튼을 그림
@@ -179,7 +179,7 @@ def start_screen():
 
         
 def story_screen():
-    background_path = pygame.image.load("D:/python응용/pygame/story/story_1.png")  # 실제 이미지 파일 경로로 대체해
+    background_path = pygame.image.load("story_image/story_1.png")  # 실제 이미지 파일 경로로 대체해
     background_image = pygame.transform.scale(background_path, (width, height))
     screen.blit(background_image, (0, 0))
 
@@ -206,7 +206,7 @@ def story_screen():
                     return "game_ready"
                 
 def next1_story():
-    story2_image = pygame.image.load("D:/python응용/pygame/story/story_2.png")  
+    story2_image = pygame.image.load("story_image/story_2.png")  
     story2_image = pygame.transform.scale(story2_image, (width, height))
     screen.blit(story2_image, (0, 0))
 
@@ -229,7 +229,7 @@ def next1_story():
 
 
 def next2_story():
-    story2_image = pygame.image.load("D:/python응용/pygame/story/story_3.png")  
+    story2_image = pygame.image.load("story_image/story_3.png")  
     story2_image = pygame.transform.scale(story2_image, (width, height))
     screen.blit(story2_image, (0, 0))
 
@@ -252,7 +252,7 @@ def next2_story():
 def next3_story():
     screen.fill(white)
     
-    story3_image = pygame.image.load("D:/python응용/pygame/story/story_button.png")  
+    story3_image = pygame.image.load("story_image/story_button.png")  
     story3_image = pygame.transform.scale(story3_image, (width, height))
     screen.blit(story3_image, (0, -20))
 
@@ -280,7 +280,7 @@ def next_start_screen():
     global cat_x
     pygame.display.update()
     # 게임 선택 배경화면 
-    background_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/next_back_grond.jpg")  # 실제 이미지 파일 경로로 대체해
+    background_path = pygame.image.load("bg/next_back_grond.jpg")  # 실제 이미지 파일 경로로 대체해
     background_image = pygame.transform.scale(background_path, (width, height))
     screen.blit(background_image, (0, 0))
 
@@ -289,7 +289,7 @@ def next_start_screen():
 
     pygame.draw.rect(screen,(225,225,255),[50,110,320,270])
 
-    music_albom_path="D:/python응용/pygame/def next_start_screen()/music_albom_picture.png"
+    music_albom_path="music_albom_picture.png"
     music_albom_image=pygame.image.load(music_albom_path)
     music_albom_width,music_albom_height=music_albom_image.get_size()
     music_albom_x, music_albom_y=(60,120)
@@ -298,7 +298,7 @@ def next_start_screen():
     draw_button("<stage1>",(203,410))
     draw_button("-The Way to You-",(203,450))
 
-    game_start_button_path = "D:/python응용/pygame/def next_start_screen()/button_question_copy.png"
+    game_start_button_path = "button/button_question_copy.png"
     game_start_button = pygame.image.load(game_start_button_path)
     game_start_button_width, game_start_button_height = game_start_button.get_size()
     screen.blit(game_start_button, (123, 480))
@@ -307,11 +307,11 @@ def next_start_screen():
 
     screen.blit(music_albom_image, (music_albom_x,music_albom_y))
 
-    black_cat_image = pygame.image.load("D:/python응용/pygame/black_cat0 (1).png")
+    black_cat_image = pygame.image.load("character/black_cat/black_cat0.png")
     black_cat_image = pygame.transform.scale(black_cat_image,(300,300))
-    three_color_cat_image = pygame.image.load("D:/python응용/pygame/three_color_cat0 (1).png")
+    three_color_cat_image = pygame.image.load("character/three_color_cat/three_color_cat0.png")
     three_color_cat_image = pygame.transform.scale(three_color_cat_image,(300,300))
-    cheese_cat_image = pygame.image.load("D:/python응용/pygame/cheese_cat0.png")
+    cheese_cat_image = pygame.image.load("character/cheese_cat/cheese_cat0.png")
     cheese_cat_image = pygame.transform.scale(cheese_cat_image,(300,300))
     screen.blit(three_color_cat_image,(430,80))
     pygame.display.update()
@@ -319,22 +319,22 @@ def next_start_screen():
     catlist =[three_color_cat_image,black_cat_image,cheese_cat_image]
     draw_button("<고양이를 선택하세요!>",(590,120))
 
-    cat_select_button_path = "D:/python응용/pygame/def next_start_screen()/next_select_button.png"
+    cat_select_button_path = "button/next_select_button.png"
     cat_select_button_right = pygame.image.load(cat_select_button_path)
     game_start_button_width, game_start_button_height = cat_select_button_right.get_size()
     screen.blit(cat_select_button_right, (730,230))
 
-    cat_select_button_path = "D:/python응용/pygame/def next_start_screen()/next_select_button_left.png"
+    cat_select_button_path = "button/next_select_button_left.png"
     cat_select_button_left = pygame.image.load(cat_select_button_path)
     game_start_button_width, game_start_button_height = cat_select_button_left.get_size()
     screen.blit(cat_select_button_left, (415,230))
     gameStart_rect = game_start_button.get_rect(topleft=(123, 480))
 
-    black_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/black_cat_choice_button.png")
+    black_cat_choice_button_path = pygame.image.load("button/black_cat_choice_button.png")
     black_cat_choice_button_image = pygame.transform.scale(black_cat_choice_button_path,(240,100))
-    three_color_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/three_color_cat_button.png")
+    three_color_cat_choice_button_path = pygame.image.load("button/three_color_cat_button.png")
     three_color_cat_choice_button_image = pygame.transform.scale(three_color_cat_choice_button_path,(240,100))
-    cheese_cat_choice_button_path = pygame.image.load("D:/python응용/pygame/def next_start_screen()/cheese_cat_choice_button.png")
+    cheese_cat_choice_button_path = pygame.image.load("button/cheese_cat_choice_button.png")
     cheese_cat_choice_button_image = pygame.transform.scale(cheese_cat_choice_button_path,(240,100))
     screen.blit(three_color_cat_choice_button_image,(470,380))
     cat_choice_button_text1=font.render("선택",True,(255,255,255))
@@ -408,7 +408,7 @@ def game_mode():
     obstacle_speed = 12
     obstacle_timer = pygame.time.get_ticks()
     obstacles = []  # 여러 장애물 저장
-    obstacle_image = pygame.image.load("D:/python응용/pygame/def game_mode()/IMG_2388.png")
+    obstacle_image = pygame.image.load("IMG_2388.png")
     obstacle_image = pygame.transform.scale(obstacle_image, (obstacle_width, obstacle_height))
 
     # 장애물 설정 2
@@ -416,7 +416,7 @@ def game_mode():
     obstacle_2_speed = 17
     obstacle_2_timer = pygame.time.get_ticks()
     obstacles_2 = []  # 여러 장애물 저장
-    obstacle_2_image = pygame.image.load("D:/python응용/pygame/def game_mode()/IMG_2386.png")
+    obstacle_2_image = pygame.image.load("IMG_2386.png")
     obstacle_2_image = pygame.transform.scale(obstacle_2_image, (obstacle_2_width, obstacle_2_height))
     
     # 체력 설정
@@ -448,29 +448,29 @@ def game_mode():
     character_x, character_y = width // 3 - character_width // 2, height - character_height * 2 #고양이 위치
 
     #각 고양이 별 이미지 로드 및 크기 조절
-    black_cat_image1 = pygame.image.load("D:/python응용/pygame/character/black_cat/black_cat1 (1).png")
-    black_cat_image2 = pygame.image.load("D:/python응용/pygame/character/black_cat/black_cat2.png")
-    black_cat_image3 = pygame.image.load("D:/python응용/pygame/character/black_cat/black_cat3.png")
+    black_cat_image1 = pygame.image.load("character/black_cat/black_cat1.png")
+    black_cat_image2 = pygame.image.load("character/black_cat/black_cat2.png")
+    black_cat_image3 = pygame.image.load("character/black_cat/black_cat3.png")
     black_cat_image1 = pygame.transform.scale(black_cat_image1,(character_width,character_height))
     black_cat_image2 = pygame.transform.scale(black_cat_image2,(character_width,character_height))
     black_cat_image3 = pygame.transform.scale(black_cat_image3,(character_width,character_height))
 
-    three_color_cat_image1 = pygame.image.load("D:/python응용/pygame/character/three_color_cat/three_color_cat1.png")
-    three_color_cat_image2 = pygame.image.load("D:/python응용/pygame/character/three_color_cat/three_color_cat2 (1).png")
-    three_color_cat_image3 = pygame.image.load("D:/python응용/pygame/character/three_color_cat/three_color_cat3.png")
+    three_color_cat_image1 = pygame.image.load("character/three_color_cat/three_color_cat1.png")
+    three_color_cat_image2 = pygame.image.load("character/three_color_cat/three_color_cat2.png")
+    three_color_cat_image3 = pygame.image.load("character/three_color_cat/three_color_cat3.png")
     three_color_cat_image1 = pygame.transform.scale(three_color_cat_image1,(character_width,character_height))
     three_color_cat_image2 = pygame.transform.scale(three_color_cat_image2,(character_width,character_height))
     three_color_cat_image3 = pygame.transform.scale(three_color_cat_image3,(character_width,character_height))
     
-    cheese_cat_image1 = pygame.image.load("D:/python응용/pygame/character/cheese_color_cat/cheese_cat1.png")
-    cheese_cat_image2 = pygame.image.load("D:/python응용/pygame/character/cheese_color_cat/cheese_cat2 (2).png")
-    cheese_cat_image3 = pygame.image.load("D:/python응용/pygame/character/cheese_color_cat/cheese_cat3 (1).png")
+    cheese_cat_image1 = pygame.image.load("character/cheese_cat/cheese_cat1.png")
+    cheese_cat_image2 = pygame.image.load("character/cheese_cat/cheese_cat2.png")
+    cheese_cat_image3 = pygame.image.load("character/cheese_cat/cheese_cat3.png")
     cheese_cat_image1 = pygame.transform.scale(cheese_cat_image1,(character_width,character_height))
     cheese_cat_image2 = pygame.transform.scale(cheese_cat_image2,(character_width,character_height))
     cheese_cat_image3 = pygame.transform.scale(cheese_cat_image3,(character_width,character_height))
     
     #게임 플레이 시 배경 이미지 파일
-    bg_image = pygame.image.load("D:/python응용/pygame/game_back_ground.png")
+    bg_image = pygame.image.load("game_back_ground.png")
     bg_image_rect = bg_image.get_rect()
     bg_image_width = bg_image_rect.width
     #catlist =[three_color_cat_image,black_cat_image,cheese_cat_image]
@@ -761,7 +761,7 @@ while running:
 
     if current_state == "start":
         try:
-            pygame.mixer.music.load("D:/python응용/pygame/bgm/lofi_chill.ogg")  # 음악 파일 로드
+            pygame.mixer.music.load("bgm/lofi_chill.ogg")  # 음악 파일 로드
         except pygame.error:
             print("ogg 파일이 맞지 않거나, 오디오 기기와 접속되어 있지 않습니다.")
         pygame.mixer.music.play(-1)  # 노래 반복 재생
@@ -781,7 +781,7 @@ while running:
     elif current_state == "game_mode":
         try:
             pygame.mixer.music.stop()  # 이전 음악 정지
-            pygame.mixer.music.load("D:/python응용/pygame/bgm/AcousticBeat.ogg")  # 새로운 음악 파일 로드
+            pygame.mixer.music.load("bgm/AcousticBeat.ogg")  # 새로운 음악 파일 로드
         except pygame.error:
             print("ogg 파일이 맞지 않거나, 오디오 기기와 접속되어 있지 않습니다.")
         pygame.mixer.music.play(-1)  # 새로운 노래 반복 재생
